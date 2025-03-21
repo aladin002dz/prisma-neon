@@ -17,7 +17,7 @@ npx prisma init
 
 on [neon.tech](https://neon.tech) create a new database, and get the connection string, that will look like this:
 
-```js
+```
 postgresql://johndoe:randompassword@localhost:5432/mydb?schema=public
 ```
 
