@@ -1,10 +1,7 @@
 'use server';
 
-import { PrismaClient } from '@prisma/client';
+import prisma from '@/prisma/prisma';
 import { revalidatePath } from 'next/cache';
-
-// Create a singleton instance of PrismaClient to avoid too many connections
-const prisma = new PrismaClient();
 
 // Delete a post by ID
 export async function deletePostAction(postId: number) {

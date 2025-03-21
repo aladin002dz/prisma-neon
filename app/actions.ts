@@ -1,11 +1,10 @@
 'use server';
 
-import { PrismaClient } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
+import prisma from '@/prisma/prisma';
 
 // Get all users for the dropdown in the form
 export async function getUsers() {
-  const prisma = new PrismaClient();
   try {
     const users = await prisma.user.findMany({
       select: {
@@ -18,15 +17,11 @@ export async function getUsers() {
   } catch (error) {
     console.error('Error fetching users:', error);
     return [];
-  } finally {
-    await prisma.$disconnect();
   }
 }
 
 // Create a new post
 export async function createPost(formData: FormData) {
-  const prisma = new PrismaClient();
-  
   try {
     const title = formData.get('title') as string;
     const content = formData.get('content') as string;
@@ -51,14 +46,11 @@ export async function createPost(formData: FormData) {
     revalidatePath('/');
   } catch (error) {
     console.error('Error creating post:', error);
-  } finally {
-    await prisma.$disconnect();
   }
 }
 
 // Get all published posts
 export async function getPosts() {
-  const prisma = new PrismaClient();
   try {
     const posts = await prisma.post.findMany({
       where: { published: true },
@@ -69,15 +61,11 @@ export async function getPosts() {
   } catch (error) {
     console.error("Error fetching posts:", error);
     return [];
-  } finally {
-    await prisma.$disconnect();
   }
 }
 
 // Delete a post by ID
 export async function deletePost(postId: number) {
-  const prisma = new PrismaClient();
-  
   try {
     // Delete the post
     await prisma.post.delete({
@@ -90,8 +78,6 @@ export async function deletePost(postId: number) {
     revalidatePath('/');
   } catch (error) {
     console.error('Error deleting post:', error);
-  } finally {
-    await prisma.$disconnect();
   }
 }
 
