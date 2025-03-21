@@ -13,6 +13,13 @@ npm install @prisma/client
 npx prisma init
 ```
 
+This command initializes a new Prisma project in your current directory by:
+- Creating a new `prisma` directory in your project
+- Generating a basic `schema.prisma` file inside that directory, which defines your database schema and connection
+- Creating a `.env` file in your project root to store your database connection string
+
+The `schema.prisma` file is the core configuration file for Prisma where you'll define your data models and database connection settings. You can also create these files manually instead of using the command if you prefer more control over the initial setup.
+
 ## Initialize Neon
 
 on [neon.tech](https://neon.tech) create a new database, and get the connection string, that will look like this:
